@@ -1,0 +1,180 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>登录</title>
+<link href="${basePath}css/login.css" type="text/css" rel="stylesheet">
+
+<script>
+$(document).ready(function(){
+    var validator;
+    validator = $("#form1").validate({
+        rules: {
+            "user.account": "required",
+            "user.password": {
+                required: true,
+                rangelength: [6, 20]
+            }
+        },
+        messages: {
+            "user.account": "请输入账号",
+            "user.password": {
+                required: "请输入密码",
+                rangelength: "密码长度为6-20"
+            },
+        }
+    });
+});
+
+</script>
+<script type="text/javascript">
+	
+	function login(){
+		$("#form1").prop("action","${basePath}login/loginAction_login.action");
+		$("#form1").submit();
+	}
+	function setClean(){
+		$("#account").prop("value","");
+		$("#password").prop("value","");
+	//	$("#form1").submit();
+	}
+</script>
+<style type="text/css">
+html { overflow-y: hidden;  }
+
+.password{
+      background-color:#f1f3f6;
+	  border:1px solid #f1f3f6;
+	  font-color:#ccc;
+}
+
+.error{
+	color:red;
+}
+
+#Layer1 {
+	position:absolute;
+	left:224px;
+	top:479px;
+	padding-top:5px;
+	width:99px;
+	height:21px;
+	background-color:#fff;
+	z-index:1;
+}
+.password1 {      
+	 background-color:#f1f3f6;
+	  border:1px solid #f1f3f6;
+	  font-color:#ccc;
+}
+
+.youbian input{ 
+	border:0px none; background-color:transparent; 
+	color:#555;padding-left:10px;font-size:16px;width:100%;overflow: hidden;
+}
+</style>
+</head>
+<body scroll="no">
+<form name="form1"  id="form1" action="" method="post">
+<div id="lo_tf">
+<div class="outside">
+    <div class="head">
+      <table width="1000" height="60" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="840" align="left"><img src="${basePath}images/login/form_03.png"   width="332" height="47"/></td>
+          <td align="center">&nbsp;&nbsp;<a href="#"></a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="main2">
+	   <div class="content">  
+	   <div class="youbian">
+	    <table width="251" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="12">&nbsp;</td>
+          </tr>
+          <tr>
+           <td height="45" align="left"></td>
+          </tr>
+          <tr>
+          	<td height="13">&nbsp;
+            	<span><div height=20 valign="middle" style="padding-left: 18px"><font color="red" id="errMsg"></font></div></span>
+            </td>
+          </tr>
+          <tr>
+            <td height="40">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    	<td height="32" align="left"><span style="color:#767676;font-size:14px;">帐号:</span></td>
+  </tr>
+</table>
+
+			<table width="100%" height="39" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td background="${basePath}images/login/shuru_03.png" width=""><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td align="left">
+                    <input type="text" id="account" name="user.account" value="admin" class="password1" style="color: #767676; width:100%; overflow:auto " size="31" />
+                    </td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+		    <tr>
+            <td height="10"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="32" align="left"><span style="color:#767676;font-size:14px;">密&nbsp;&nbsp;码:</span></td>
+  </tr>
+</table></td>
+          </tr>
+          <tr>
+            <td height="40"><table width="100%" height="39" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td background="${basePath}images/login/shuru_03.png"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td align="left">
+                    	<input type="password" id="password"  name="user.password"  value="123123" class="password"  style="color: #767676 ;width:100%; overflow:auto " size="32"  />
+                    </td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+          
+		   <tr>
+            <td height="10">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="40"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+              	<!-- 登录按钮 -->
+                <td align="right"><a href="#" onclick="javascript:login();"><img src="${basePath}images/login/form_15.png" width="95" height="37"/></a></td>
+                <td width="18">&nbsp;</td>
+                <!-- 重置按钮 -->
+                <td align="left"><a href="#" onclick="javascript:setClean();">
+                	<img src="${basePath}images/login/form_17.png" width="95" height="37"/></a>
+                </td>
+              </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td height="10">&nbsp;</td>
+          </tr>
+          <tr>
+          	<td align="center"><font size="4" color="red" id ="tips">${errorMessage}</font></td>
+          </tr>
+        </table>
+	    
+	  </div>   
+       </div>
+   </div>
+	<div class="foot">版权所有&nbsp;|&nbsp;国税局&nbsp;&nbsp;2018年</div>
+</div>
+</div>
+</form>
+</body>
+</html>

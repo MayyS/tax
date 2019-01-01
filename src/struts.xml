@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置Struts2常量 -->
+
+    <!-- 开启开发模式，只在项目开发阶段配置 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 配置访问后缀为action，即只有加了.action后缀的url请求会被struts2框架拦截处理 -->
+    <constant name="struts.action.extension" value="action"/>
+    <!-- 把主题配置成simple -->
+	<constant name="struts.ui.theme" value="simple" />
+	
+
+	<package name="base" extends="struts-default" namespace="/">
+	
+	<!-- 定义全局异常结果视图 -->
+		<!--<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</global-results>
+		&lt;!&ndash; 定义捕捉的异常类型 &ndash;&gt;
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+	-->
+	</package>
+
+
+	
+	<package name="home-package" extends="base" namespace="/home">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="homeAction_*" class="gdpu.tax.action.HomeAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/nsfw/{1}.jsp</result>
+		</action>
+		
+	</package>
+	
+	
+	
+	<package name="user-package" extends="base" namespace="/user">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="userAction_*" class="gdpu.tax.action.UserAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/nsfw/user/{1}.jsp</result>
+			<result name="list" type="redirect">userAction_listUI.action</result>
+		</action>
+		
+	</package>
+	<!-- 登录模块 -->
+	<package name="login-package" extends="base" namespace="/login">
+		<action name="loginAction_*" class="gdpu.tax.action.LoginAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
+			<result name="fail">/WEB-INF/jsp/loginUI.jsp</result>
+			<result name="home" type="redirectAction">
+				<param name="namespace">/home</param>
+				<param name="actionName">homeAction_frame.action</param>
+			</result>
+		</action>
+	</package>
+	
+	<!-- 信息管理模块 -->
+	<package name="info-package" extends="base" namespace="/info">
+		<action name="infoAction_*" class="gdpu.tax.action.InfoAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/nsfw/info/{1}.jsp</result>
+			<result name="list" type="redirect">infoAction_listUI.action</result>
+		</action>
+	</package>
+	
+	<!-- 角色管理 -->
+		<package name="role-package" extends="base" namespace="/role">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="roleAction_*" class="gdpu.tax.action.RoleAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/nsfw/role/{1}.jsp</result>
+			<result name="list" type="redirect">roleAction_listUI.action</result>
+		</action>
+		</package>
+		
+	<!-- 纳税咨询管理 -->
+		<package name="consult-package" extends="base" namespace="/consult">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="consultAction_*" class="gdpu.tax.action.ConsultAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/nsfw/consult/{1}.jsp</result>
+		</action>
+		</package>
+	
+	<!-- 投诉受理管理 -->
+		<package name="complain-package" extends="base" namespace="/complain">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="complainAction_*" class="gdpu.tax.action.ComplainAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/nsfw/complain/{1}.jsp</result>
+		</action>
+		</package>
+
+
+	<package name="permission-package" extends="base" namespace="/permission">
+		<action name="permissionAction_*" class="gdpu.tax.action.PermissionAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/nsfw/permission/{1}.jsp</result>
+			<result name="list" type="redirect">permissionAction_listUI.action</result>
+		</action>
+	</package>
+
+		
+</struts>
